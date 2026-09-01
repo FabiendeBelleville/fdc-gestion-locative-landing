@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestion locative nouvelle génération — Lyon | Liste d'attente</title>
+<meta name="description" content="Service de gestion locative en préparation à Lyon. Liste d'attente d'étude limitée aux 30 premiers biens — aucun prix ferme à ce stade.">
+<style>
+  :root {
+    --ink: #1c2733;
+    --ink-soft: #51606f;
+    --paper: #fbfaf7;
+    --card: #ffffff;
+    --line: #e3e0d8;
+    --accent: #1f4e79;
+    --accent-ink: #ffffff;
+    --ok: #2e6b4f;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+  header.hero { padding: 56px 0 40px; }
+  .badge {
+    display: inline-block; font-size: 13px; font-weight: 600;
+    color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 999px; padding: 4px 12px; margin-bottom: 20px;
+  }
+  h1 { font-size: clamp(28px, 5vw, 38px); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 14px; }
+  .lede { font-size: 18px; color: var(--ink-soft); margin-bottom: 10px; }
+  .cap { font-size: 15px; color: var(--ink-soft); }
+  .cap strong { color: var(--ink); }
+  .cta {
+    display: inline-block; margin-top: 24px; background: var(--accent); color: var(--accent-ink);
+    text-decoration: none; font-weight: 600; font-size: 16px;
+    padding: 12px 24px; border-radius: 8px; border: 0; cursor: pointer;
+  }
+  .cta:hover { filter: brightness(1.12); }
+  section { padding: 32px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 21px; margin-bottom: 18px; }
+  ul.features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+  ul.features li { padding-left: 26px; position: relative; font-size: 15px; }
+  ul.features li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 700; }
+  @media (max-width: 560px) { ul.features { grid-template-columns: 1fr; } }
+  .why p, .who p { color: var(--ink-soft); font-size: 15px; margin-bottom: 10px; }
+  .why p strong, .who p strong { color: var(--ink); }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+  label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 6px; }
+  label span.opt { font-weight: 400; color: var(--ink-soft); }
+  input[type="email"], select {
+    width: 100%; padding: 11px 12px; font-size: 15px; font-family: inherit;
+    border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  input[type="email"]:focus, select:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+  .form-note { font-size: 13px; color: var(--ink-soft); margin-top: 6px; }
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
+  #confirm { display: none; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--ok); border-radius: 12px; padding: 24px; }
+  #confirm h2 { color: var(--ok); }
+  #confirm p { font-size: 15px; color: var(--ink-soft); margin-bottom: 12px; }
+  #confirm p strong { color: var(--ink); }
+  .founder-note { font-size: 13px; color: var(--ink-soft); margin-top: 14px; }
+  footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 24px 0 48px; }
+  footer p { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 10px; }
+  .err { color: #a33; font-size: 14px; margin-top: 10px; display: none; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="badge">Service en préparation — ouverture prévue début 2027</span>
+    <h1>Votre bien loué et géré de bout en bout, à Lyon.</h1>
+    <p class="lede">Locataire trouvé, loyers suivis, incidents traités. Réponse à toute demande sous 24 h ouvrées.</p>
+    <p class="cap"><strong>Liste d'attente d'étude limitée aux 30 premiers biens.</strong> Fourchette d'honoraires à l'étude — aucun prix ferme n'est proposé à ce stade.</p>
+    <a class="cta" href="#inscription">Rejoindre la liste d'attente</a>
+  </header>
+
+  <section>
+    <h2>Ce que le service prendra en charge</h2>
+    <ul class="features">
+      <li>Mise en location : annonce, visites, sélection du dossier locataire</li>
+      <li>Bail et états des lieux</li>
+      <li>Loyers, quittances et relances</li>
+      <li>Incidents et travaux, avec artisans suivis</li>
+      <li>Régularisation annuelle des charges</li>
+      <li>Conformité : encadrement des loyers, DPE, obligations du bailleur</li>
+    </ul>
+  </section>
+
+  <section class="who">
+    <h2>Qui est derrière ce projet</h2>
+    <p><strong>Un fondateur, pas une plateforme anonyme.</strong> Fabien Drouin, ingénieur — dix ans de conception de systèmes fiables, et un passé d'ingénieur en énergétique (audits d'installations, suivi de travaux pour copropriétés et bailleurs).</p>
+    <p>Concrètement pour vous : un DPE, un devis de rénovation ou un litige de charges sont lus et pilotés en connaissance de cause — pas transférés à un standard.</p>
+  </section>
+
+  <section class="why">
+    <h2>Pourquoi une liste d'attente</h2>
+    <p>Le service se construit en ce moment, avec les propriétaires lyonnais eux-mêmes : je rencontre chaque inscrit pour comprendre comment sa location se passe aujourd'hui, et le service ouvrira sur ces réalités — pas sur des suppositions.</p>
+    <p><strong>En vous inscrivant :</strong> vous êtes prioritaire à l'ouverture et vous bénéficiez des conditions réservées aux premiers inscrits.</p>
+  </section>
+
+  <section id="inscription">
+    <h2>Rejoindre la liste d'attente</h2>
+
+    <form id="waitlist" novalidate>
+      <label for="email">Votre email</label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr">
+
+      <label for="nb">Combien de biens louez-vous ? <span class="opt">(facultatif)</span></label>
+      <select id="nb" name="nb_biens">
+        <option value="">—</option>
+        <option>1</option>
+        <option>2 à 3</option>
+        <option>4 et plus</option>
+        <option>Pas encore bailleur</option>
+      </select>
+
+      <label for="gestion">Aujourd'hui, qui gère ? <span class="opt">(facultatif)</span></label>
+      <select id="gestion" name="gestion_actuelle">
+        <option value="">—</option>
+        <option>Moi-même</option>
+        <option>Une agence</option>
+        <option>Un proche</option>
+        <option>Personne / bien vacant</option>
+      </select>
+
+      <!-- Piège à robots : champ invisible, toute valeur = spam -->
+      <div class="hp" aria-hidden="true">
+        <label for="website">Site web</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <p class="form-note">Un seul champ obligatoire — le reste nous aide simplement à préparer l'échange.</p>
+      <button class="cta" type="submit" id="submitBtn">Rejoindre la liste d'attente</button>
+      <p class="err" id="formErr">L'envoi n'a pas fonctionné. Réessayez, ou écrivez-nous directement — l'adresse est en bas de page.</p>
+    </form>
+
+    <div id="confirm">
+      <h2>Vous êtes sur la liste.</h2>
+      <p>Je parle en ce moment à des propriétaires de Lyon pour construire le service autour de leurs vraies galères — pas de mes suppositions.</p>
+      <p><strong>15 minutes au téléphone cette semaine ?</strong> Vous me racontez comment se passe votre location aujourd'hui ; vous aurez en priorité les conditions réservées aux premiers inscrits.</p>
+      <a class="cta" id="callBtn" href="#" target="_blank" rel="noopener">Choisir un créneau</a>
+      <p class="founder-note">C'est le fondateur qui vous appelle, pas un commercial.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Pré-inscription d'intention sans engagement — ceci n'est pas une offre.</strong> Aucune prestation de gestion n'est commercialisée à ce jour ; l'activité sera exercée, à l'ouverture, sous réserve d'obtention de la carte professionnelle (loi Hoguet), de la garantie financière et de l'assurance de responsabilité civile professionnelle. Fourchette d'honoraires à l'étude : aucun prix ferme n'est proposé à ce stade.</p>
+    <p>Vos données (email et réponses facultatives) servent uniquement à vous tenir informé de ce projet et à organiser l'échange proposé. Elles ne sont ni cédées ni transmises à des tiers, et sont supprimées sur simple demande à <span class="contact-email">…</span>.</p>
+    <p>Projet porté par Fabien Drouin — Lyon.</p>
+  </footer>
+
+</div>
+
+<script>
+  // ── Configuration : 3 valeurs à renseigner avant mise en ligne ──────────────
+  // formEndpoint : URL Formspree (https://formspree.io/f/XXXX) ou équivalent.
+  //                Vide = repli : la confirmation s'affiche et un email pré-rempli
+  //                est proposé, aucune donnée n'est perdue.
+  // calendlyUrl  : lien Calendly du fondateur. Vide = le bouton bascule sur l'email.
+  const CONFIG = {
+    formEndpoint: "",
+    calendlyUrl: "",
+    contactEmail: "fabien.drouin@gmail.com",
+  };
+  // ────────────────────────────────────────────────────────────────────────────
+
+  document.querySelectorAll(".contact-email").forEach(el => { el.textContent = CONFIG.contactEmail; });
+
+  const form = document.getElementById("waitlist");
+  const confirmBox = document.getElementById("confirm");
+  const errBox = document.getElementById("formErr");
+  const callBtn = document.getElementById("callBtn");
+
+  function mailtoFallback(data) {
+    const body = encodeURIComponent(
+      "Bonjour,\n\nJe souhaite rejoindre la liste d'attente du service de gestion locative à Lyon.\n\n"
+      + "Email : " + data.email + "\n"
+      + "Nombre de biens : " + (data.nb_biens || "non précisé") + "\n"
+      + "Gestion actuelle : " + (data.gestion_actuelle || "non précisé") + "\n"
+    );
+    return "mailto:" + CONFIG.contactEmail + "?subject=" + encodeURIComponent("Liste d'attente — gestion locative Lyon") + "&body=" + body;
+  }
+
+  function showConfirm(data) {
+    form.style.display = "none";
+    confirmBox.style.display = "block";
+    if (CONFIG.calendlyUrl) {
+      callBtn.href = CONFIG.calendlyUrl;
+      callBtn.textContent = "Choisir un créneau";
+    } else {
+      callBtn.href = mailtoFallback(data);
+      callBtn.textContent = "Proposer un créneau par email";
+    }
+    confirmBox.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errBox.style.display = "none";
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (data.website) return; // robot
+    if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
+      errBox.textContent = "Merci d'indiquer un email valide.";
+      errBox.style.display = "block";
+      return;
+    }
+    if (!CONFIG.formEndpoint) {
+      // Pas de backend branché : la confirmation propose l'envoi par email pré-rempli.
+      window.open(mailtoFallback(data), "_self");
+      showConfirm(data);
+      return;
+    }
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    try {
+      const res = await fetch(CONFIG.formEndpoint, {
+        method: "POST",
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(res.status);
+      showConfirm(data);
+    } catch {
+      errBox.textContent = "L'envoi n'a pas fonctionné. Réessayez, ou écrivez à " + CONFIG.contactEmail + ".";
+      errBox.style.display = "block";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
