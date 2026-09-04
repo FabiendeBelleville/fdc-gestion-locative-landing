@@ -1,6 +1,6 @@
 # Landing — liste d'attente « gestion locative Lyon »
 
-Source de vérité : ce dossier, dans le dépôt privé `gestion-locative`. Publication : GitHub Pages depuis le dépôt public `FabiendeBelleville/fdc-lyon-landing`, sur https://lyon.fabiendrouinconsulting.com. Ne pas éditer dans le dépôt public, il est écrasé à chaque publication.
+Source de vérité : ce dossier, dans le dépôt privé `gestion-locative`. Publication : GitHub Pages depuis le dépôt public `FabiendeBelleville/fdc-lyon-landing`, sur https://gestion-locative.fabiendrouinconsulting.com. Ne pas éditer dans le dépôt public, il est écrasé à chaque publication.
 
 ## Publier une modification
 
@@ -16,7 +16,7 @@ Le remote `landing-public` pointe sur https://github.com/FabiendeBelleville/fdc-
 
 | Type | Hôte | Cible |
 |---|---|---|
-| CNAME | `lyon` | `fabiendebelleville.github.io` |
+| CNAME | `gestion-locative` | `fabiendebelleville.github.io` |
 
 Une fois le CNAME propagé et le certificat émis par GitHub (quelques minutes à une heure), forcer HTTPS :
 
