@@ -7,10 +7,10 @@ Source de vérité : ce dossier, dans le dépôt privé `gestion-locative`. Publ
 Depuis la racine du dépôt privé, après avoir commité les changements du dossier `landing/` :
 
 ```
-git subtree push --prefix=landing landing-public main
+git push --force landing-public "$(git subtree split --prefix=landing main):main"
 ```
 
-Le remote `landing-public` pointe sur https://github.com/FabiendeBelleville/fdc-gestion-locative-landing.git. GitHub Pages redéploie en une à deux minutes.
+Le remote `landing-public` pointe sur https://github.com/FabiendeBelleville/fdc-gestion-locative-landing.git. GitHub Pages redéploie en une à deux minutes. Le `--force` est normal : le dépôt public n'est qu'une cible de déploiement, et dès que `main` contient des commits de fusion, l'historique découpé par subtree n'est plus en avance rapide (le simple `git subtree push` est alors refusé).
 
 ## DNS (à faire une fois, chez Squarespace Domains)
 
