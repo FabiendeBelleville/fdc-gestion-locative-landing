@@ -3,86 +3,239 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gestion locative nouvelle génération | Liste d'attente</title>
-<meta name="description" content="Service de gestion locative en préparation. Liste d'attente d'étude limitée aux 30 premiers biens — aucun prix ferme à ce stade.">
+<title>Tête libre — gestion locative, liste d'attente</title>
+<meta name="description" content="Un service de gestion locative se construit avec des propriétaires qui en ont assez de tout porter. Avant d'ouvrir, le fondateur vous écoute : 15 minutes, rien à vendre. Liste d'attente d'étude, aucun prix ferme à ce stade.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap">
 <style>
+  /* Système : voir DESIGN.md à la racine du dépôt. Cinq couleurs, une police, un motif. */
   :root {
-    --ink: #1c2733;
-    --ink-soft: #51606f;
-    --paper: #fbfaf7;
-    --card: #ffffff;
-    --line: #e3e0d8;
-    --accent: #1f4e79;
-    --accent-ink: #ffffff;
-    --ok: #2e6b4f;
+    --creme: #FFF7EC; --creme-2: #F8E9D2;
+    --encre: #1E2430; --encre-2: #4A5261; --encre-3: #7C8493;
+    --corail: #E8563A; --corail-deep: #C9432A;
+    --menthe: #BFEBD3; --menthe-ink: #1F6B47;
+    --beurre: #FFE28A;
+
+    --bg: var(--creme); --bg-2: var(--creme-2);
+    --ink: var(--encre); --ink-2: var(--encre-2); --ink-3: var(--encre-3);
+    --accent: var(--corail); --accent-ink: var(--creme);
+    --relief: var(--menthe); --relief-ink: var(--menthe-ink);
+    --hl: var(--beurre);
+    --line: #E6D5BC;
+    --btn-bg: var(--encre); --btn-ink: var(--creme);
+    --field-bg: #FFFDF8;
+    --band-bg: var(--encre); --band-ink: var(--creme);
+    --err: var(--corail-deep);
+
+    --font: "Bricolage Grotesque", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px; --s5: 48px; --s6: 64px; --s7: 96px; --s8: 128px;
+    --r: 14px; --pill: 999px;
+    --measure: 700px; --wide: 1080px;
   }
-  * { box-sizing: border-box; margin: 0; }
-  body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    line-height: 1.55;
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171B24; --bg-2: #1F2430;
+      --ink: #FFF3E0; --ink-2: #C9C2B4; --ink-3: #8E8A80;
+      --accent: #E8563A; --accent-ink: #FFF7EC;
+      --relief: #1E4A36; --relief-ink: #BFEBD3;
+      --hl: #6B5A1A;
+      --line: #2E3442;
+      --btn-bg: #FFF3E0; --btn-ink: #171B24;
+      --field-bg: #1F2430;
+      --band-bg: #FFF3E0; --band-ink: #171B24;
+      --err: #FF8F75;
+    }
   }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
-  header.hero { padding: 56px 0 40px; }
-  .badge {
-    display: inline-block; font-size: 13px; font-weight: 600;
-    color: var(--accent); border: 1px solid var(--accent);
-    border-radius: 999px; padding: 4px 12px; margin-bottom: 20px;
+  :root[data-theme="dark"] {
+    --bg: #171B24; --bg-2: #1F2430;
+    --ink: #FFF3E0; --ink-2: #C9C2B4; --ink-3: #8E8A80;
+    --accent: #E8563A; --accent-ink: #FFF7EC;
+    --relief: #1E4A36; --relief-ink: #BFEBD3;
+    --hl: #6B5A1A;
+    --line: #2E3442;
+    --btn-bg: #FFF3E0; --btn-ink: #171B24;
+    --field-bg: #1F2430;
+    --band-bg: #FFF3E0; --band-ink: #171B24;
+    --err: #FF8F75;
   }
-  h1 { font-size: clamp(28px, 5vw, 38px); line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 14px; }
-  .lede { font-size: 18px; color: var(--ink-soft); margin-bottom: 10px; }
-  .cap { font-size: 15px; color: var(--ink-soft); }
-  .cap strong { color: var(--ink); }
-  .cta {
-    display: inline-block; margin-top: 24px; background: var(--accent); color: var(--accent-ink);
-    text-decoration: none; font-weight: 600; font-size: 16px;
-    padding: 12px 24px; border-radius: 8px; border: 0; cursor: pointer;
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 18px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--beurre); color: var(--encre); }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .hero :focus-visible { outline-color: var(--accent-ink); }
+  p { margin: 0 0 var(--s2); }
+  [hidden] { display: none !important; }
+  .wrap { max-width: var(--measure); margin: 0 auto; padding: 0 var(--s3); }
+  .wide { max-width: var(--wide); margin: 0 auto; padding: 0 var(--s3); }
+
+  /* ── héros corail ────────────────────────────────────── */
+  .hero { background: var(--accent); color: var(--accent-ink); padding: var(--s3) 0 var(--s6); overflow: hidden; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); margin-bottom: var(--s6); flex-wrap: wrap; }
+  .mark { font-weight: 800; font-size: 19px; letter-spacing: -0.01em; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+  .mark svg { width: 36px; height: 16px; overflow: visible; }
+  .mark path { fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  .eyebrow { font-size: 12.5px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; opacity: .9; }
+
+  .poster { display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--s4); align-items: center; }
+  @media (max-width: 760px) { .poster { grid-template-columns: 1fr; } }
+  h1 {
+    font-weight: 800; font-variation-settings: "wdth" 78;
+    font-size: clamp(76px, 16vw, 168px); line-height: .86; letter-spacing: -0.035em;
+    margin: 0 0 var(--s4); text-wrap: balance;
   }
-  .cta:hover { filter: brightness(1.12); }
-  section { padding: 32px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: 21px; margin-bottom: 18px; }
-  ul.features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
-  ul.features li { padding-left: 26px; position: relative; font-size: 15px; }
-  ul.features li::before { content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 700; }
-  @media (max-width: 560px) { ul.features { grid-template-columns: 1fr; } }
-  .why p, .who p { color: var(--ink-soft); font-size: 15px; margin-bottom: 10px; }
-  .why p strong, .who p strong { color: var(--ink); }
-  form { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
-  label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 6px; }
-  label span.opt { font-weight: 400; color: var(--ink-soft); }
-  input[type="email"], select {
-    width: 100%; padding: 11px 12px; font-size: 15px; font-family: inherit;
-    border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+  h1 span { display: block; }
+  h1 .soft { color: var(--beurre); }
+  .lede { font-size: clamp(19px, 2.2vw, 23px); line-height: 1.4; max-width: 30ch; margin: 0 0 var(--s4); }
+  .lede strong { font-weight: 700; }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s3); align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; text-decoration: none; cursor: pointer; border: 0;
+    background: var(--btn-bg); color: var(--btn-ink); font: inherit; font-weight: 700; font-size: 19px; letter-spacing: -0.01em;
+    padding: 17px 28px; border-radius: var(--pill); transition: transform .12s ease, background .15s ease, color .15s ease;
   }
-  input[type="email"]:focus, select:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
-  .form-note { font-size: 13px; color: var(--ink-soft); margin-top: 6px; }
+  .hero .btn, .confirm .btn { background: var(--encre); color: var(--creme); }
+  .btn:hover { background: var(--beurre); color: var(--encre); }
+  .btn:active { transform: scale(.96); }
+  .btn:disabled { opacity: .6; cursor: wait; }
+  .btn svg { width: 22px; height: 12px; }
+  .btn path { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .minor { font-size: 15.5px; max-width: 26ch; line-height: 1.35; opacity: .95; }
+
+  /* le Nœud */
+  .knot-wrap { display: grid; justify-items: center; gap: 12px; }
+  .knot { width: min(100%, 360px); height: auto; overflow: visible; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .knot path { fill: none; stroke: var(--accent-ink); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+  .knot .tangle { stroke-dasharray: 1400; stroke-dashoffset: 0; transition: stroke-dashoffset 1.1s cubic-bezier(.7,0,.3,1), opacity .4s ease .8s; }
+  .knot .calm { stroke-dasharray: 200; stroke-dashoffset: 200; opacity: 0; transition: stroke-dashoffset .9s cubic-bezier(.3,0,.2,1) .5s, opacity .2s ease .5s; }
+  .knot .eyes { transition: transform 1s cubic-bezier(.6,0,.2,1) .35s; }
+  .knot .eye { fill: var(--accent-ink); }
+  .knot .pupil { fill: var(--encre); }
+  .knot .lid { transform-origin: center; transform-box: fill-box; }
+  .knot.is-calm .tangle { stroke-dashoffset: 1400; opacity: 0; }
+  .knot.is-calm .calm { stroke-dashoffset: 0; opacity: 1; }
+  .knot.is-calm .eyes { transform: translate(52px, -2px); }
+  .knot-cap { font-size: 14px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; opacity: .9; text-align: center; min-height: 1.4em; }
+  .knot-cap .calm-cap { display: none; }
+  .knot-wrap.is-calm .tangle-cap { display: none; }
+  .knot-wrap.is-calm .calm-cap { display: inline; }
+  @media (prefers-reduced-motion: no-preference) {
+    .knot .lid { animation: blink 4.6s ease-in-out infinite; }
+    @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+    .knot:not(.is-calm) { animation: breathe 3.2s ease-in-out infinite; }
+    @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+  }
+
+  /* ── bandeau des galères ─────────────────────────────── */
+  .band { background: var(--band-bg); color: var(--band-ink); overflow: hidden; padding: 14px 0; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; }
+  .track { display: flex; white-space: nowrap; width: max-content; }
+  .track span { padding: 0 22px; }
+  .track span::after { content: "·"; margin-left: 40px; color: var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    .track { animation: slide 38s linear infinite; }
+    .band:hover .track { animation-play-state: paused; }
+    @keyframes slide { to { transform: translateX(-50%); } }
+  }
+  @media (prefers-reduced-motion: reduce) { .track { white-space: normal; width: auto; flex-wrap: wrap; } .track .dup { display: none; } }
+
+  /* ── sections ────────────────────────────────────────── */
+  section { padding: var(--s7) 0 0; }
+  h2 { font-weight: 800; font-size: clamp(36px, 6vw, 56px); line-height: .98; letter-spacing: -0.03em; margin: 0 0 var(--s3); text-wrap: balance; font-variation-settings: "wdth" 88; }
+  .big-p { font-size: clamp(20px, 2.4vw, 24px); line-height: 1.4; max-width: 30ch; }
+  .muted { color: var(--ink-2); }
+
+  .ouf { display: grid; grid-template-columns: auto 1fr; gap: var(--s3); align-items: center; margin-top: var(--s4); background: var(--relief); color: var(--relief-ink); border-radius: 24px; padding: var(--s3) var(--s4); }
+  .ouf b { font-weight: 800; font-size: clamp(48px, 8vw, 84px); line-height: 1; letter-spacing: -0.04em; }
+  .ouf p { margin: 0; font-size: 18px; }
+  @media (max-width: 520px) { .ouf { grid-template-columns: 1fr; } }
+
+  .prend { list-style: none; margin: var(--s3) 0 0; padding: 0; columns: 2; column-gap: var(--s4); }
+  .prend li { break-inside: avoid; padding: 12px 0; border-top: 1.5px solid var(--line); font-size: 17px; }
+  @media (max-width: 560px) { .prend { columns: 1; } }
+
+  .founder { display: grid; grid-template-columns: 120px 1fr; gap: var(--s4); align-items: start; }
+  .portrait { width: 120px; height: 120px; border-radius: 50%; background: var(--accent); color: var(--creme); display: grid; place-items: center; font-weight: 800; font-size: 40px; letter-spacing: -0.03em; overflow: hidden; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 480px) { .founder { grid-template-columns: 1fr; } }
+
+  .form-card { background: var(--bg-2); border-radius: 28px; padding: clamp(24px, 5vw, 48px); }
+  label { display: block; font-weight: 600; font-size: 14.5px; margin: 20px 0 8px; }
+  label .opt { font-weight: 400; color: var(--ink-2); }
+  input[type="email"], select { width: 100%; padding: 15px 16px; font: inherit; color: var(--ink); background: var(--field-bg); border: 1.5px solid var(--line); border-radius: var(--r); }
+  input[type="email"]:focus, select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+  .form-note { font-size: 14.5px; color: var(--ink-2); margin: 16px 0 22px; }
   .hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }
-  #confirm { display: none; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--ok); border-radius: 12px; padding: 24px; }
-  #confirm h2 { color: var(--ok); }
-  #confirm p { font-size: 15px; color: var(--ink-soft); margin-bottom: 12px; }
-  #confirm p strong { color: var(--ink); }
-  .founder-note { font-size: 13px; color: var(--ink-soft); margin-top: 14px; }
-  footer { border-top: 1px solid var(--line); margin-top: 40px; padding: 24px 0 48px; }
-  footer p { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 10px; }
-  .err { color: #a33; font-size: 14px; margin-top: 10px; display: none; }
+  .err { color: var(--err); font-weight: 600; font-size: 15px; margin: 14px 0 0; }
+
+  .confirm { background: var(--relief); color: var(--relief-ink); border-radius: 28px; padding: clamp(24px, 5vw, 48px); }
+  .confirm h2 { color: inherit; }
+  .confirm h2 b { font-size: 1.4em; display: block; letter-spacing: -0.04em; }
+  .confirm .note { font-size: 14.5px; opacity: .85; margin-top: var(--s2); }
+
+  footer { margin-top: var(--s8); padding: var(--s4) 0 var(--s6); border-top: 1.5px solid var(--line); }
+  footer p { font-size: 13px; line-height: 1.55; color: var(--ink-2); margin-bottom: 10px; }
+  footer p strong { color: var(--ink); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<header class="hero">
+  <div class="wide">
+    <div class="top">
+      <a class="mark" href="#" aria-label="Tête libre, accueil">
+        <svg viewBox="0 0 68 28" aria-hidden="true"><path d="M2 14 C 6 2, 12 26, 16 14 S 24 2, 28 14 S 36 24, 40 14 L 66 14"/></svg>
+        Tête libre
+      </a>
+      <span class="eyebrow">En préparation · ouverture 2027 · rien à vendre aujourd'hui</span>
+    </div>
 
-  <header class="hero">
-    <span class="badge">Service en préparation — ouverture prévue début 2027</span>
-    <h1>Votre bien loué et géré de bout en bout.</h1>
-    <p class="lede">Locataire trouvé, loyers suivis, incidents traités. Réponse à toute demande sous 24 h ouvrées.</p>
-    <p class="cap"><strong>Liste d'attente d'étude limitée aux 30 premiers biens.</strong> Fourchette d'honoraires à l'étude — aucun prix ferme n'est proposé à ce stade.</p>
-    <a class="cta" href="#inscription">Rejoindre la liste d'attente</a>
-  </header>
+    <div class="poster">
+      <div>
+        <h1><span>Louez.</span><span class="soft">Respirez.</span></h1>
+        <p class="lede">Un service de gestion locative se construit avec des propriétaires qui en ont assez de tout porter. Avant d'ouvrir, je vous écoute : <strong>15 minutes, rien à vendre.</strong></p>
+        <div class="actions">
+          <a class="btn" href="#inscription">Je raconte ma location <svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H 20 M 15 1.5 L 20 6 L 15 10.5"/></svg></a>
+          <span class="minor">30 premiers biens sur la liste. Un seul champ à remplir.</span>
+        </div>
+      </div>
+
+      <div class="knot-wrap" id="knotWrap">
+        <svg class="knot" id="knot" viewBox="0 0 240 200" role="img" tabindex="0" aria-label="Le Nœud : une pelote de charge mentale qui se démêle en une ligne droite. Cliquez pour la démêler.">
+          <path class="tangle" d="M40 120 C 30 40, 130 20, 150 70 S 90 150, 60 130 S 80 50, 140 60 S 210 110, 170 150 S 70 170, 80 110 S 150 40, 190 80 S 180 160, 120 160 S 40 150, 60 90 S 130 30, 170 60"/>
+          <path class="calm" d="M20 132 L 220 132"/>
+          <g class="eyes">
+            <g class="lid"><circle class="eye" cx="112" cy="104" r="11"/><circle class="pupil" cx="115" cy="105" r="4.5"/></g>
+            <g class="lid"><circle class="eye" cx="140" cy="104" r="11"/><circle class="pupil" cx="143" cy="105" r="4.5"/></g>
+          </g>
+        </svg>
+        <span class="knot-cap" aria-hidden="true"><span class="tangle-cap">La charge mentale. Cliquez dessus.</span><span class="calm-cap">Ouf. C'est l'idée.</span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="band" aria-label="Ce qui pèse quand on gère seul">
+  <div class="track">
+    <span>dossiers à trier</span><span>visites du samedi</span><span>état des lieux</span><span>loyer en retard</span><span>la relance qu'on n'a pas envie d'écrire</span><span>DPE</span><span>encadrement des loyers</span><span>régularisation des charges</span><span>le locataire qui écrit à 23 h</span><span>la chaudière en janvier</span>
+    <span class="dup" aria-hidden="true">dossiers à trier</span><span class="dup" aria-hidden="true">visites du samedi</span><span class="dup" aria-hidden="true">état des lieux</span><span class="dup" aria-hidden="true">loyer en retard</span><span class="dup" aria-hidden="true">la relance qu'on n'a pas envie d'écrire</span><span class="dup" aria-hidden="true">DPE</span><span class="dup" aria-hidden="true">encadrement des loyers</span><span class="dup" aria-hidden="true">régularisation des charges</span><span class="dup" aria-hidden="true">le locataire qui écrit à 23 h</span><span class="dup" aria-hidden="true">la chaudière en janvier</span>
+  </div>
+</div>
+
+<main class="wrap">
 
   <section>
-    <h2>Ce que le service prendra en charge</h2>
-    <ul class="features">
+    <h2>Vous avez un bien. Vous n'avez pas signé pour un deuxième métier.</h2>
+    <p class="big-p">Gérer seul, c'est porter tout ça dans un coin de la tête, tout le temps. Pas grave. Jusqu'au jour où ça l'est.</p>
+    <div class="ouf">
+      <b>Ouf.</b>
+      <p>Le service prendra tout ça en charge, de bout en bout. Réponse à toute demande sous 24 h ouvrées.</p>
+    </div>
+    <ul class="prend">
       <li>Mise en location : annonce, visites, sélection du dossier locataire</li>
       <li>Bail et états des lieux</li>
       <li>Loyers, quittances et relances</li>
@@ -90,76 +243,74 @@
       <li>Régularisation annuelle des charges</li>
       <li>Conformité : encadrement des loyers, DPE, obligations du bailleur</li>
     </ul>
+    <p class="muted" style="margin-top:16px">Fourchette d'honoraires à l'étude. Aucun prix ferme à ce stade, et c'est voulu : je préfère vous écouter d'abord.</p>
   </section>
 
-  <section class="who">
-    <h2>Qui est derrière ce projet</h2>
-    <p><strong>Un fondateur, pas une plateforme anonyme.</strong> Fabien Drouin, ingénieur — dix ans de conception de systèmes fiables, et un passé d'ingénieur en énergétique (audits d'installations, suivi de travaux pour copropriétés et bailleurs).</p>
-    <p>Concrètement pour vous : un DPE, un devis de rénovation ou un litige de charges sont lus et pilotés en connaissance de cause — pas transférés à un standard.</p>
+  <section>
+    <h2>Un humain. Un seul.</h2>
+    <div class="founder">
+      <!-- Remplacer par <img src="fabien.jpg" alt="Fabien Drouin"> quand la photo est prête (carré, 240 px suffisent). -->
+      <div class="portrait" aria-label="Fabien Drouin">FD</div>
+      <div>
+        <p><strong>Fabien Drouin, ingénieur.</strong> Dix ans de conception de systèmes fiables, et avant ça l'énergétique du bâtiment : audits d'installations, suivi de travaux pour copropriétés et bailleurs.</p>
+        <p class="muted">Concrètement pour vous : un DPE, un devis de rénovation ou un litige de charges sont lus et pilotés en connaissance de cause, pas transférés à un standard.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="why">
-    <h2>Pourquoi une liste d'attente</h2>
-    <p>Le service se construit en ce moment, avec les propriétaires eux-mêmes : je rencontre chaque inscrit pour comprendre comment sa location se passe aujourd'hui, et le service ouvrira sur ces réalités — pas sur des suppositions.</p>
-    <p><strong>En vous inscrivant :</strong> vous êtes prioritaire à l'ouverture et vous bénéficiez des conditions réservées aux premiers inscrits.</p>
+  <section>
+    <h2>Pas d'offre. Une écoute.</h2>
+    <p class="big-p">Le service se construit avec les propriétaires eux-mêmes. Je rencontre chaque inscrit pour comprendre comment sa location se passe aujourd'hui, et le service ouvrira sur ces réalités, pas sur des suppositions.</p>
+    <p><strong>En vous inscrivant</strong>, vous êtes prioritaire à l'ouverture et vous bénéficiez des conditions réservées aux premiers inscrits.</p>
   </section>
 
   <section id="inscription">
-    <h2>Rejoindre la liste d'attente</h2>
+    <div class="form-card" id="formCard">
+      <h2>Racontez-moi votre location</h2>
+      <p class="muted">Un seul champ obligatoire. Le reste nous aide à préparer l'échange.</p>
+      <form id="waitlist" novalidate>
+        <label for="email">Votre email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr">
+        <div class="row2">
+          <div>
+            <label for="nb">Combien de biens louez-vous ? <span class="opt">(facultatif)</span></label>
+            <select id="nb" name="nb_biens"><option value="">—</option><option>1</option><option>2 à 3</option><option>4 et plus</option><option>Pas encore bailleur</option></select>
+          </div>
+          <div>
+            <label for="gestion">Aujourd'hui, qui gère ? <span class="opt">(facultatif)</span></label>
+            <select id="gestion" name="gestion_actuelle"><option value="">—</option><option>Moi-même</option><option>Une agence</option><option>Un proche</option><option>Personne / bien vacant</option></select>
+          </div>
+        </div>
+        <!-- Piège à robots : champ invisible, toute valeur = spam -->
+        <div class="hp" aria-hidden="true">
+          <label for="website">Site web</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <p class="form-note">Pré-inscription d'intention, sans engagement. Vos données ne servent qu'à organiser l'échange.</p>
+        <button class="btn" type="submit" id="submitBtn">Rejoindre la liste <svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H 20 M 15 1.5 L 20 6 L 15 10.5"/></svg></button>
+        <p class="err" id="formErr" hidden></p>
+      </form>
+    </div>
 
-    <form id="waitlist" novalidate>
-      <label for="email">Votre email</label>
-      <input type="email" id="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr">
-
-      <label for="nb">Combien de biens louez-vous ? <span class="opt">(facultatif)</span></label>
-      <select id="nb" name="nb_biens">
-        <option value="">—</option>
-        <option>1</option>
-        <option>2 à 3</option>
-        <option>4 et plus</option>
-        <option>Pas encore bailleur</option>
-      </select>
-
-      <label for="gestion">Aujourd'hui, qui gère ? <span class="opt">(facultatif)</span></label>
-      <select id="gestion" name="gestion_actuelle">
-        <option value="">—</option>
-        <option>Moi-même</option>
-        <option>Une agence</option>
-        <option>Un proche</option>
-        <option>Personne / bien vacant</option>
-      </select>
-
-      <!-- Piège à robots : champ invisible, toute valeur = spam -->
-      <div class="hp" aria-hidden="true">
-        <label for="website">Site web</label>
-        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-      </div>
-
-      <p class="form-note">Un seul champ obligatoire — le reste nous aide simplement à préparer l'échange.</p>
-      <button class="cta" type="submit" id="submitBtn">Rejoindre la liste d'attente</button>
-      <p class="err" id="formErr">L'envoi n'a pas fonctionné. Réessayez, ou écrivez-nous directement — l'adresse est en bas de page.</p>
-    </form>
-
-    <div id="confirm">
-      <h2>Vous êtes sur la liste.</h2>
-      <p>Je parle en ce moment à des propriétaires pour construire le service autour de leurs vraies galères — pas de mes suppositions.</p>
-      <p><strong>15 minutes au téléphone cette semaine ?</strong> Vous me racontez comment se passe votre location aujourd'hui ; vous aurez en priorité les conditions réservées aux premiers inscrits.</p>
-      <a class="cta" id="callBtn" href="#" target="_blank" rel="noopener">Choisir un créneau</a>
-      <p class="founder-note">C'est le fondateur qui vous appelle, pas un commercial.</p>
+    <div class="confirm" id="confirm" hidden>
+      <h2><b>Ouf.</b> Vous êtes sur la liste.</h2>
+      <p>Je parle en ce moment à des propriétaires pour construire le service autour de leurs vraies galères, pas de mes suppositions.</p>
+      <p><strong>15 minutes au téléphone cette semaine ?</strong> Vous me racontez comment se passe votre location aujourd'hui. Vous choisissez le créneau, c'est moi qui appelle.</p>
+      <a class="btn" id="callBtn" href="#" target="_blank" rel="noopener">Choisir un créneau <svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H 20 M 15 1.5 L 20 6 L 15 10.5"/></svg></a>
+      <p class="note">C'est le fondateur qui vous appelle, pas un commercial.</p>
     </div>
   </section>
 
   <footer>
-    <p><strong>Pré-inscription d'intention sans engagement — ceci n'est pas une offre.</strong> Aucune prestation de gestion n'est commercialisée à ce jour ; l'activité sera exercée, à l'ouverture, sous réserve d'obtention de la carte professionnelle (loi Hoguet), de la garantie financière et de l'assurance de responsabilité civile professionnelle. Fourchette d'honoraires à l'étude : aucun prix ferme n'est proposé à ce stade.</p>
+    <p><strong>Pré-inscription d'intention sans engagement, ceci n'est pas une offre.</strong> Aucune prestation de gestion n'est commercialisée à ce jour ; l'activité sera exercée, à l'ouverture, sous réserve d'obtention de la carte professionnelle (loi Hoguet), de la garantie financière et de l'assurance de responsabilité civile professionnelle. Fourchette d'honoraires à l'étude : aucun prix ferme n'est proposé à ce stade.</p>
     <p>Vos données (email et réponses facultatives) servent uniquement à vous tenir informé de ce projet et à organiser l'échange proposé. Elles ne sont ni cédées ni transmises à des tiers, et sont supprimées sur simple demande à <span class="contact-email">…</span>.</p>
-    <p>Projet porté par Fabien Drouin.</p>
-    <p>Mentions légales — Éditeur : Fabien Drouin, contact : <span class="contact-email">…</span>. Hébergeur : GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — +1 415-735-4488.</p>
+    <p>Projet porté par Fabien Drouin. Mentions légales : éditeur Fabien Drouin, contact <span class="contact-email">…</span>. Hébergeur : GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis, +1 415-735-4488.</p>
   </footer>
 
-</div>
+</main>
 
 <script>
-  // ── Configuration : 3 valeurs à renseigner avant mise en ligne ──────────────
+  // ── Configuration : 3 valeurs ──────────────────────────────────────────────
   // formEndpoint : URL Formspree (https://formspree.io/f/XXXX) ou équivalent.
   //                Vide = repli : la confirmation s'affiche et un email pré-rempli
   //                est proposé, aucune donnée n'est perdue.
@@ -174,7 +325,20 @@
 
   document.querySelectorAll(".contact-email").forEach(el => { el.textContent = CONFIG.contactEmail; });
 
+  // Le Nœud
+  (function () {
+    const knot = document.getElementById("knot");
+    const wrap = document.getElementById("knotWrap");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const set = calm => { knot.classList.toggle("is-calm", calm); wrap.classList.toggle("is-calm", calm); };
+    knot.addEventListener("click", () => set(!knot.classList.contains("is-calm")));
+    knot.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); knot.click(); } });
+    if (reduce) { set(true); } else { setTimeout(() => set(true), 2200); setTimeout(() => set(false), 5200); }
+  })();
+
+  // Formulaire
   const form = document.getElementById("waitlist");
+  const formCard = document.getElementById("formCard");
   const confirmBox = document.getElementById("confirm");
   const errBox = document.getElementById("formErr");
   const callBtn = document.getElementById("callBtn");
@@ -190,26 +354,25 @@
   }
 
   function showConfirm(data) {
-    form.style.display = "none";
-    confirmBox.style.display = "block";
+    formCard.hidden = true;
+    confirmBox.hidden = false;
     if (CONFIG.calendlyUrl) {
       callBtn.href = CONFIG.calendlyUrl;
-      callBtn.textContent = "Choisir un créneau";
     } else {
       callBtn.href = mailtoFallback(data);
-      callBtn.textContent = "Proposer un créneau par email";
+      callBtn.firstChild.textContent = "Proposer un créneau par email ";
     }
     confirmBox.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    errBox.style.display = "none";
+    errBox.hidden = true;
     const data = Object.fromEntries(new FormData(form).entries());
     if (data.website) return; // robot
     if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) {
       errBox.textContent = "Merci d'indiquer un email valide.";
-      errBox.style.display = "block";
+      errBox.hidden = false;
       return;
     }
     if (!CONFIG.formEndpoint) {
@@ -230,7 +393,7 @@
       showConfirm(data);
     } catch {
       errBox.textContent = "L'envoi n'a pas fonctionné. Réessayez, ou écrivez à " + CONFIG.contactEmail + ".";
-      errBox.style.display = "block";
+      errBox.hidden = false;
     } finally {
       btn.disabled = false;
     }
