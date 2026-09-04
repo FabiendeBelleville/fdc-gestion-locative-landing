@@ -199,8 +199,8 @@
         <h1><span>Louez.</span><span class="soft">Respirez.</span></h1>
         <p class="lede">Un service de gestion locative se construit avec des propriétaires qui en ont assez de tout porter. Avant d'ouvrir, je vous écoute : <strong>15 minutes, rien à vendre.</strong></p>
         <div class="actions">
-          <a class="btn" href="#inscription">Je raconte ma location <svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H 20 M 15 1.5 L 20 6 L 15 10.5"/></svg></a>
-          <span class="minor">30 premiers biens sur la liste. Un seul champ à remplir.</span>
+          <a class="btn" data-book href="https://calendar.app.google/YML8pHh9XsLzUV2m7" target="_blank" rel="noopener">Je raconte ma location <svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H 20 M 15 1.5 L 20 6 L 15 10.5"/></svg></a>
+          <span class="minor">15 minutes, téléphone ou visio. Vous choisissez le créneau, c'est moi qui appelle.</span>
         </div>
       </div>
 
@@ -260,13 +260,14 @@
   <section>
     <h2>Pas d'offre. Une écoute.</h2>
     <p class="big-p">Le service se construit avec les propriétaires eux-mêmes. Je rencontre chaque inscrit pour comprendre comment sa location se passe aujourd'hui, et le service ouvrira sur ces réalités, pas sur des suppositions.</p>
-    <p><strong>En vous inscrivant</strong>, vous êtes prioritaire à l'ouverture et vous bénéficiez des conditions réservées aux premiers inscrits.</p>
+    <p><strong>En prenant 15 minutes avec moi</strong>, vous êtes prioritaire à l'ouverture et vous bénéficiez des conditions réservées aux premiers inscrits.</p>
+    <p style="margin-top: var(--s3)"><a class="btn" data-book href="https://calendar.app.google/YML8pHh9XsLzUV2m7" target="_blank" rel="noopener">Je réserve 15 minutes <svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H 20 M 15 1.5 L 20 6 L 15 10.5"/></svg></a></p>
   </section>
 
   <section id="inscription">
     <div class="form-card" id="formCard">
-      <h2>Racontez-moi votre location</h2>
-      <p class="muted">Un seul champ obligatoire. Le reste nous aide à préparer l'échange.</p>
+      <h2>Pas maintenant ? Restez au courant.</h2>
+      <p class="muted">Laissez votre email : vous serez prévenu à l'ouverture, et prioritaire. Un seul champ obligatoire, le reste nous aide à préparer l'échange.</p>
       <form id="waitlist" novalidate>
         <label for="email">Votre email</label>
         <input type="email" id="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr">
@@ -302,7 +303,7 @@
 
   <footer>
     <p><strong>Pré-inscription d'intention sans engagement, ceci n'est pas une offre.</strong> Aucune prestation de gestion n'est commercialisée à ce jour ; l'activité sera exercée, à l'ouverture, sous réserve d'obtention de la carte professionnelle (loi Hoguet), de la garantie financière et de l'assurance de responsabilité civile professionnelle. Fourchette d'honoraires à l'étude : aucun prix ferme n'est proposé à ce stade.</p>
-    <p>Vos données (email et réponses facultatives) servent uniquement à vous tenir informé de ce projet et à organiser l'échange proposé. Elles ne sont ni cédées ni transmises à des tiers, et sont supprimées sur simple demande à <span class="contact-email">…</span>.</p>
+    <p>Vos données (nom, email, téléphone si vous réservez un créneau, et réponses facultatives) servent uniquement à vous tenir informé de ce projet et à organiser l'échange proposé. Les réservations de créneau passent par Google Agenda. Ces données ne sont ni cédées ni transmises à des tiers, et sont supprimées sur simple demande à <span class="contact-email">…</span>.</p>
     <p>Projet porté par Fabien Drouin. Mentions légales : éditeur Fabien Drouin, contact <span class="contact-email">…</span>. Hébergeur : GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis, +1 415-735-4488.</p>
   </footer>
 
@@ -323,6 +324,11 @@
   // ────────────────────────────────────────────────────────────────────────────
 
   document.querySelectorAll(".contact-email").forEach(el => { el.textContent = CONFIG.contactEmail; });
+  // Boutons de réservation : suivent CONFIG.calendlyUrl ; sans lien, ils renvoient au formulaire.
+  document.querySelectorAll("a[data-book]").forEach(a => {
+    if (CONFIG.calendlyUrl) { a.href = CONFIG.calendlyUrl; }
+    else { a.href = "#inscription"; a.removeAttribute("target"); }
+  });
 
   // Le Nœud
   (function () {
