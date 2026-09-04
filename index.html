@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gestion locative nouvelle génération — Lyon | Liste d'attente</title>
-<meta name="description" content="Service de gestion locative en préparation à Lyon. Liste d'attente d'étude limitée aux 30 premiers biens — aucun prix ferme à ce stade.">
+<title>Gestion locative nouvelle génération | Liste d'attente</title>
+<meta name="description" content="Service de gestion locative en préparation. Liste d'attente d'étude limitée aux 30 premiers biens — aucun prix ferme à ce stade.">
 <style>
   :root {
     --ink: #1c2733;
@@ -74,7 +74,7 @@
 
   <header class="hero">
     <span class="badge">Service en préparation — ouverture prévue début 2027</span>
-    <h1>Votre bien loué et géré de bout en bout, à Lyon.</h1>
+    <h1>Votre bien loué et géré de bout en bout.</h1>
     <p class="lede">Locataire trouvé, loyers suivis, incidents traités. Réponse à toute demande sous 24 h ouvrées.</p>
     <p class="cap"><strong>Liste d'attente d'étude limitée aux 30 premiers biens.</strong> Fourchette d'honoraires à l'étude — aucun prix ferme n'est proposé à ce stade.</p>
     <a class="cta" href="#inscription">Rejoindre la liste d'attente</a>
@@ -100,7 +100,7 @@
 
   <section class="why">
     <h2>Pourquoi une liste d'attente</h2>
-    <p>Le service se construit en ce moment, avec les propriétaires lyonnais eux-mêmes : je rencontre chaque inscrit pour comprendre comment sa location se passe aujourd'hui, et le service ouvrira sur ces réalités — pas sur des suppositions.</p>
+    <p>Le service se construit en ce moment, avec les propriétaires eux-mêmes : je rencontre chaque inscrit pour comprendre comment sa location se passe aujourd'hui, et le service ouvrira sur ces réalités — pas sur des suppositions.</p>
     <p><strong>En vous inscrivant :</strong> vous êtes prioritaire à l'ouverture et vous bénéficiez des conditions réservées aux premiers inscrits.</p>
   </section>
 
@@ -142,7 +142,7 @@
 
     <div id="confirm">
       <h2>Vous êtes sur la liste.</h2>
-      <p>Je parle en ce moment à des propriétaires de Lyon pour construire le service autour de leurs vraies galères — pas de mes suppositions.</p>
+      <p>Je parle en ce moment à des propriétaires pour construire le service autour de leurs vraies galères — pas de mes suppositions.</p>
       <p><strong>15 minutes au téléphone cette semaine ?</strong> Vous me racontez comment se passe votre location aujourd'hui ; vous aurez en priorité les conditions réservées aux premiers inscrits.</p>
       <a class="cta" id="callBtn" href="#" target="_blank" rel="noopener">Choisir un créneau</a>
       <p class="founder-note">C'est le fondateur qui vous appelle, pas un commercial.</p>
@@ -152,7 +152,7 @@
   <footer>
     <p><strong>Pré-inscription d'intention sans engagement — ceci n'est pas une offre.</strong> Aucune prestation de gestion n'est commercialisée à ce jour ; l'activité sera exercée, à l'ouverture, sous réserve d'obtention de la carte professionnelle (loi Hoguet), de la garantie financière et de l'assurance de responsabilité civile professionnelle. Fourchette d'honoraires à l'étude : aucun prix ferme n'est proposé à ce stade.</p>
     <p>Vos données (email et réponses facultatives) servent uniquement à vous tenir informé de ce projet et à organiser l'échange proposé. Elles ne sont ni cédées ni transmises à des tiers, et sont supprimées sur simple demande à <span class="contact-email">…</span>.</p>
-    <p>Projet porté par Fabien Drouin — Lyon.</p>
+    <p>Projet porté par Fabien Drouin.</p>
     <p>Mentions légales — Éditeur : Fabien Drouin, contact : <span class="contact-email">…</span>. Hébergeur : GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — +1 415-735-4488.</p>
   </footer>
 
@@ -181,12 +181,12 @@
 
   function mailtoFallback(data) {
     const body = encodeURIComponent(
-      "Bonjour,\n\nJe souhaite rejoindre la liste d'attente du service de gestion locative à Lyon.\n\n"
+      "Bonjour,\n\nJe souhaite rejoindre la liste d'attente du service de gestion locative.\n\n"
       + "Email : " + data.email + "\n"
       + "Nombre de biens : " + (data.nb_biens || "non précisé") + "\n"
       + "Gestion actuelle : " + (data.gestion_actuelle || "non précisé") + "\n"
     );
-    return "mailto:" + CONFIG.contactEmail + "?subject=" + encodeURIComponent("Liste d'attente — gestion locative Lyon") + "&body=" + body;
+    return "mailto:" + CONFIG.contactEmail + "?subject=" + encodeURIComponent("Liste d'attente — gestion locative") + "&body=" + body;
   }
 
   function showConfirm(data) {

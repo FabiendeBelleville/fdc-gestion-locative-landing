@@ -1,4 +1,4 @@
-# Landing — liste d'attente « gestion locative Lyon »
+# Landing — liste d'attente « gestion locative »
 
 Source de vérité : ce dossier, dans le dépôt privé `gestion-locative`. Publication : GitHub Pages depuis le dépôt public `FabiendeBelleville/fdc-gestion-locative-landing`, sur https://gestion-locative.fabiendrouinconsulting.com. Ne pas éditer dans le dépôt public, il est écrasé à chaque publication.
 
